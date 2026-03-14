@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVault - 二次元遊戲資源庫</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #0a0a0f; --bg-card: #12121a; --accent-primary: #ff6b9d; --accent-secondary: #c792ea; --accent-tertiary: #7ee8fa; --text-primary: #ffffff; --text-secondary: #b8b8c8; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; }
+        .bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(10,10,15,0.3) 0%, rgba(10,10,15,0.95) 100%), url('https://wallpapercave.com/wp/wp5926421.jpg'); background-size: cover; z-index: -2; }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .particle { position: absolute; width: 4px; height: 4px; background: var(--accent-primary); border-radius: 50%; animation: float 15s infinite; opacity: 0.6; }
+        @keyframes float { 0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.6; } 100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; } }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 15px 30px; background: rgba(10,10,15,0.85); backdrop-filter: blur(20px); display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Orbitron'; font-size: 1.6rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo span { font-size: 0.9rem; opacity: 0.7; }
+        nav { display: flex; gap: 25px; }
+        nav a { color: var(--text-secondary); text-decoration: none; font-weight: 500; }
+        nav a:hover { color: var(--accent-primary); }
+        .music-btn { background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border: none; padding: 8px 16px; border-radius: 20px; color: #fff; cursor: pointer; }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 100px 20px; }
+        .hero-avatar { width: 180px; height: 180px; border-radius: 50%; border: 4px solid var(--accent-primary); box-shadow: 0 0 40px rgba(255,107,157,0.5); margin-bottom: 30px; animation: pulse 2s infinite; background: url('https://wallpapercave.com/wp/wp9089796.jpg'); background-size: cover; }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 40px rgba(255,107,157,0.5); } 50% { box-shadow: 0 0 60px rgba(255,107,157,0.8); } }
+        .hero h1 { font-family: 'Orbitron'; font-size: 3.5rem; margin-bottom: 15px; }
+        .hero h1 .highlight { background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 550px; margin-bottom: 35px; }
+        .hero-btns { display: flex; gap: 15px; }
+        .btn { padding: 14px 35px; border-radius: 30px; font-size: 1rem; font-weight: 600; text-decoration: none; border: none; cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, var(--accent-primary), #ff8fab); color: #fff; box-shadow: 0 0 25px rgba(255,107,157,0.4); }
+        .btn-primary:hover { transform: translateY(-3px); }
+        .btn-secondary { background: transparent; border: 2px solid var(--accent-secondary); color: #fff; }
+        .section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-family: 'Orbitron'; font-size: 1.8rem; margin-bottom: 35px; text-align: center; }
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; }
+        .category-card { background: rgba(18,18,26,0.8); border-radius: 20px; padding: 25px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .category-card:hover { transform: translateY(-8px); border-color: var(--accent-primary); }
+        .category-icon { font-size: 2.5rem; margin-bottom: 10px; }
+        .category-name { font-weight: 600; }
+        .category-count { color: var(--text-secondary); font-size: 0.85rem; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .game-card { background: rgba(18,18,26,0.9); border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s; }
+        .game-card:hover { transform: translateY(-8px); border-color: var(--accent-secondary); }
+        .game-cover { height: 200px; background: linear-gradient(135deg, #1a1a2e, #16213e); display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; }
+        .game-cover img { width: 100%; height: 100%; object-fit: cover; position: absolute; }
+        .game-badge { position: absolute; top: 10px; right: 10px; background: var(--accent-primary); padding: 4px 12px; border-radius: 15px; font-size: 0.75rem; }
+        .game-info { padding: 20px; }
+        .game-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 8px; }
+        .game-meta { display: flex; gap: 15px; color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px; }
+        .game-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+        .tag { padding: 4px 10px; background: rgba(255,107,157,0.15); color: var(--accent-primary); border-radius: 12px; font-size: 0.75rem; }
+        .game-link { display: inline-block; margin-top: 15px; color: var(--accent-tertiary); text-decoration: none; }
+        .game-link:hover { text-decoration: underline; }
+        .upload-section { background: rgba(18,18,26,0.8); border-radius: 25px; padding: 50px; border: 2px dashed rgba(255,107,157,0.3); text-align: center; margin: 40px 0; }
+        .upload-icon { font-size: 4rem; animation: bounce 1s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        footer { text-align: center; padding: 40px; color: var(--text-secondary); border-top: 1px solid rgba(255,255,255,0.05); }
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.9); z-index: 200; align-items: center; justify-content: center; }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--bg-card); border-radius: 25px; padding: 40px; max-width: 400px; width: 90%; text-align: center; border: 1px solid var(--accent-primary); }
+        .modal h2 { color: var(--accent-primary); margin-bottom: 20px; font-family: 'Orbitron'; }
+        .modal input { width: 100%; padding: 14px; background: var(--bg-dark); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #fff; font-size: 1rem; margin-bottom: 15px; }
+        .modal input:focus { outline: none; border-color: var(--accent-primary); }
+        .error-msg { color: #ff6b6b; font-size: 0.9rem; display: none; }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="particles" id="particles"></div>
+    <header>
+        <div class="logo">GAME<span>VAULT</span></div>
+        <nav><a href="#home">首頁</a><a href="#games">遊戲</a><a href="#categories">分類</a><a href="#upload">上傳</a></nav>
+        <button class="music-btn" onclick="toggleMusic()">🎵</button>
+    </header>
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-avatar"></div>
+            <h1>GameVault</h1>
+            <p>二次元遊戲資源庫<br>發現、分享、下載優質遊戲素材</p>
+            <div class="hero-btns"><a href="#games" class="btn btn-primary">開始探索</a><a href="#upload" class="btn btn-secondary">上傳資源</a></div>
+        </section>
+        <section class="section" id="categories">
+            <h2 class="section-title">資源分類</h2>
+            <div class="categories-grid">
+                <div class="category-card"><div class="category-icon">🎭</div><div class="category-name">3D 模型</div><div class="category-count">42 個</div></div>
+                <div class="category-card"><div class="category-icon">🖼️</div><div class="category-name">2D 貼圖</div><div class="category-count">38 個</div></div>
+                <div class="category-card"><div class="category-icon">🔊</div><div class="category-name">音效</div><div class="category-count">25 個</div></div>
+                <div class="category-card"><div class="category-icon">📜</div><div class="category-name">腳本</div><div class="category-count">18 個</div></div>
+                <div class="category-card"><div class="category-icon">⚡</div><div class="category-name">VFX</div><div class="category-count">15 個</div></div>
+                <div class="category-card"><div class="category-icon">🎨</div><div class="category-name">UI</div><div class="category-count">12 個</div></div>
+            </div>
+        </section>
+        <section class="section" id="games">
+            <h2 class="section-title">熱門遊戲</h2>
+            <div class="games-grid">
+                <div class="game-card"><div class="game-cover"><img src="https://wallpapercave.com/wp/wp5926421.jpg"><span class="game-badge">HOT</span></div><div class="game-info"><div class="game-title">🌸 櫻花王國</div><div class="game-meta"><span>256 MB</span><span>1.2K</span><span>4.8</span></div><div class="game-tags"><span class="tag">RPG</span><span class="tag">日系</span></div><a href="game-detail.html" class="game-link">查看詳情 →</a></div></div>
+                <div class="game-card"><div class="game-cover"><img src="https://wallpapercave.com/wp/wp9089796.jpg"><span class="game-badge">NEW</span></div><div class="game-info"><div class="game-title">⚔️ 劍與魔法</div><div class="game-meta"><span>512 MB</span><span>890</span><span>4.9</span></div><div class="game-tags"><span class="tag">動作</span><span class="tag">奇幻</span></div><a href="game-detail.html" class="game-link">查看詳情 →</a></div></div>
+                <div class="game-card"><div class="game-cover"><img src="https://wallpapercave.com/wp/wp10543286.jpg"></div><div class="game-info"><div class="game-title">🚀 星河戰士</div><div class="game-meta"><span>380 MB</span><span>654</span><span>4.7</span></div><div class="game-tags"><span class="tag">射擊</span><span class="tag">科幻</span></div><a href="game-detail.html" class="game-link">查看詳情 →</a></div></div>
+                <div class="game-card"><div class="game-cover"><img src="https://wallpapercave.com/wp/wp2531819.jpg"></div><div class="game-info"><div class="game-title">🏠 溫馨小鎮</div><div class="game-meta"><span>180 MB</span><span>432</span><span>4.6</span></div><div class="game-tags"><span class="tag">模擬</span><span class="tag">休閒</span></div><a href="game-detail.html" class="game-link">查看詳情 →</a></div></div>
+            </div>
+        </section>
+        <section class="section" id="upload">
+            <h2 class="section-title">上傳資源</h2>
+            <div class="upload-section">
+                <div class="upload-icon">☁️</div><h3 style="margin:15px 0">分享你的資源</h3>
+                <div style="border:2px dashed rgba(255,255,255,0.1);border-radius:15px;padding:40px;margin:20px 0;cursor:pointer" onclick="checkPassword()">
+                    <p>點擊上傳檔案</p><p style="font-size:0.8rem;color:#666;margin-top:10px">支援: .zip, .rar, .fbx, .png, .wav</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer><p>GameVault © 2026</p></footer>
+    <div class="modal" id="passwordModal">
+        <div class="modal-content"><h2>🔐 訪問密碼</h2><input type="password" id="passwordInput" placeholder="請輸入密碼"><div class="error-msg" id="errorMsg">密碼錯誤</div><button class="btn btn-primary" onclick="verifyPassword()" style="width:100%">確認</button></div>
+    </div>
+    <audio id="bgMusic" loop><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3"></audio>
+    <script>
+        const p=document.getElementById('particles');
+        for(let i=0;i<50;i++){const d=document.createElement('div');d.className='particle';d.style.left=Math.random()*100+'%';d.style.animationDelay=Math.random()*15+'s';d.style.animationDuration=(10+Math.random()*10)+'s';p.appendChild(d);}
+        let playing=false;function toggleMusic(){const m=document.getElementById('bgMusic');playing?m.pause():m.play();playing=!playing;}
+        const pw='123456';
+        function checkPassword(){document.getElementById('passwordModal').classList.add('active');}
+        function verifyPassword(){document.getElementById('passwordInput').value===pw?(closeModal(),alert('OK')):document.getElementById('errorMsg').style.display='block';}
+        function closeModal(){document.getElementById('passwordModal').classList.remove('active');document.getElementById('passwordInput').value='';}
+    </script>
+</body>
+</html>

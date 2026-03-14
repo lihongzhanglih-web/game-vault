@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遊戲詳情 - GameVault</title>
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; background: #0a0a0f; color: #fff; margin: 0; }
+        header { position: fixed; top: 0; left: 0; right: 0; padding: 15px 30px; background: rgba(10,10,15,0.9); display: flex; justify-content: space-between; }
+        .logo { font-weight: 900; background: linear-gradient(135deg, #ff6b9d, #c792ea); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header a { color: #b8b8c8; text-decoration: none; }
+        .container { max-width: 900px; margin: 0 auto; padding: 100px 20px 60px; }
+        .back { color: #ff6b9d; text-decoration: none; display: inline-block; margin-bottom: 30px; }
+        .game-header { display: flex; gap: 30px; flex-wrap: wrap; }
+        .cover { width: 300px; height: 200px; border-radius: 15px; overflow: hidden; }
+        .cover img { width: 100%; height: 100%; object-fit: cover; }
+        .info { flex: 1; min-width: 280px; }
+        .title { font-size: 2rem; margin-bottom: 15px; }
+        .meta { display: flex; gap: 20px; color: #b8b8c8; margin-bottom: 20px; }
+        .tags { display: flex; gap: 10px; margin-bottom: 25px; }
+        .tag { padding: 6px 14px; background: rgba(255,107,157,0.15); color: #ff6b9d; border-radius: 15px; font-size: 0.85rem; }
+        .btn { padding: 14px 30px; background: linear-gradient(135deg, #ff6b9d, #ff8fab); color: #fff; border-radius: 25px; text-decoration: none; display: inline-block; }
+        .section { background: rgba(18,18,26,0.8); border-radius: 20px; padding: 30px; margin: 25px 0; }
+        .section h2 { color: #ff6b9d; margin-bottom: 20px; }
+        .download-list { display: grid; gap: 15px; }
+        .download-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #0a0a0f; border-radius: 10px; }
+        .download-btn { padding: 8px 20px; background: #c792ea; color: #fff; border-radius: 15px; text-decoration: none; }
+        .screenshots { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
+        .screenshot img { width: 100%; height: 100px; object-fit: cover; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <header><div class="logo">GAMEVAULT</div><a href="index.html">回首頁</a></header>
+    <div class="container">
+        <a href="index.html#games" class="back">← 返回</a>
+        <div class="game-header">
+            <div class="cover"><img src="https://wallpapercave.com/wp/wp5926421.jpg" alt="遊戲"></div>
+            <div class="info">
+                <h1 class="title">🌸 櫻花王國</h1>
+                <div class="meta"><span>256 MB</span><span>1.2K 下載</span><span>⭐ 4.8</span></div>
+                <div class="tags"><span class="tag">RPG</span><span class="tag">日系</span><span class="tag">冒險</span></div>
+                <a href="#" class="btn">⬇️ 下載資源</a>
+            </div>
+        </div>
+        <div class="section"><h2>📝 介紹</h2><p>🌸 櫻花王國是一款充滿日式風情的 RPG遊戲，玩家在充滿櫻花的奇幻世界中展開冒險。</p></div>
+        <div class="section"><h2>📦 資源包</h2>
+            <div class="download-list">
+                <div class="download-item"><div><h4>遊戲本體</h4><p>256 MB</p></div><a href="#" class="download-btn">下載</a></div>
+                <div class="download-item"><div><h4>角色立繪</h4><p>50+ 張</p></div><a href="#" class="download-btn">下載</a></div>
+                <div class="download-item"><div><h4>背景音樂</h4><p>BGM + 音效</p></div><a href="#" class="download-btn">下載</a></div>
+            </div>
+        </div>
+        <div class="section"><h2>🖼️ 截圖</h2>
+            <div class="screenshots">
+                <div class="screenshot"><img src="https://wallpapercave.com/wp/wp5926421.jpg"></div>
+                <div class="screenshot"><img src="https://wallpapercave.com/wp/wp9089796.jpg"></div>
+                <div class="screenshot"><img src="https://wallpapercave.com/wp/wp10543286.jpg"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
